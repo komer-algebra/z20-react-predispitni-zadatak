@@ -5,6 +5,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 
 import CommentList from '../components/CommentList';
+import { Accordion } from 'react-bootstrap';
 
 
 export default function Post({id, title, body}) {
@@ -21,17 +22,18 @@ export default function Post({id, title, body}) {
   }
 
   return (
-    <li key={id} className="card">
+    <Accordion.Item eventKey={id}>
       <h4 style={{color:'blue'}}>{title}</h4>
-      <div>
-        <p>{body}</p>
-        <Button variant="primary" onClick={()=>getComments(id)}>Show comments</Button>
-        <Button variant="danger" onClick={()=>setComments([])}>Clear comments</Button>
+      <Accordion.Header>
+        {body}
+        {/* <Button variant="primary" onClick={()=>getComments(id)}>Show comments</Button>
+        <Button variant="danger" onClick={()=>setComments([])}>Clear comments</Button> */}
         <br/>
-
-      </div>
-      { comments.length > 0 && <CommentList comments={comments}/>}
-    </li>
+      </Accordion.Header>
+      <Accordion.Body onEnter={()=>getComments(id)} onExited={()=>setComments([])}>
+        { comments.length > 0 && <CommentList comments={comments}/>}
+      </Accordion.Body>
+    </Accordion.Item>
   );
 }
 

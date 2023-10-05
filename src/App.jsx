@@ -3,6 +3,8 @@ import axios from 'axios';
 import './App.css';
 import Post from './containers/Post';
 import React from './assets/react.svg';
+import Accordion from 'react-bootstrap/Accordion';
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,11 +31,12 @@ function App() {
       </h1>
       <h6>There are {count} posts</h6>
       </nav>
-      <ul>
+
+      <Accordion defaultActiveKey="0">
         {posts.map((post) => (
           <Post key={post.id} id={post.id} title={post.title} body={post.body}/>
         ))}
-      </ul>
+      </Accordion>
     </>
   )
 }
